@@ -1,4 +1,6 @@
 import express from 'express';
+import userInfo from '../database/models/User.js';
+import passport from 'passport';
 const router = express.Router();
 
 // Define a route
@@ -16,7 +18,7 @@ router.post('/login', async (req, res) => {
         console.log(err);
       } else {
         passport.authenticate('local')(req, res, function () {
-          res.redirect('/app.js');
+          res.redirect('/home');
         });
       }
     });
