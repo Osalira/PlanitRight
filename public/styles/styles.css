@@ -1,0 +1,147 @@
+footer {
+    height: 200px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #3f51b5;
+  }
+  
+  header {
+    background-color: #3f51b5;
+  }
+  
+  .containerList {
+    display: grid;
+    justify-content: center;
+  }
+  
+  .scrollable-table {
+    max-height: 320px; /* Adjust as needed */
+    overflow-y: auto;
+    display: block;
+    max-width: 350px;
+  }
+  
+  .titleBlock {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .addTaskBlock {
+    width: 350px;
+  }
+  /* 
+  .btnCss {
+    border-radius: 10%;
+  } */
+  
+  /* work page card */
+  
+  .containerCard {
+    box-sizing: border-box;
+    background: #eeeff4;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 200px;
+    /* padding-bottom: 200px; */
+  }
+  /* .cards_wrap */
+  .headerC {
+    /* width: 100%; */
+    min-width: 340px;
+    height: 50px;
+    background: #5063cd;
+    color: #fff;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    /* text-transform: uppercase; */
+    font-weight: 600;
+  }
+  .cards_wrap {
+    padding: 10px;
+    width: 25%;
+    display: flex;
+    /* max-height: 25%; */
+    min-width: 340px;
+    min-height: 200px;
+    flex-wrap: wrap;
+  }
+  
+  .cards_wrap .Card_Item {
+    /* padding: 5px; */
+  }
+  
+  .cards_wrap .innerCard {
+    padding: 10px;
+    background: #fff;
+    min-width: 340px;
+    min-height: 200px;
+    /* width: 100%; */
+  }
+  
+  .cardFooter {
+    height: 50px;
+    width: 100%;
+    background: #dbdeea;
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .cards_wrap {
+      width: 33%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .cards_wrap {
+      width: 50%;
+    }
+    .containerCard .headerC {
+      font-size: 16px;
+      height: 60px;
+    }
+  }
+  
+  @media screen and (max-width: 425px) {
+    .cards_wrap {
+      width: 100%;
+    }
+    .containerCard .headerC {
+      font-size: 14px;
+    }
+  }
+  
+  /* here is the edit button at work */
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #a40505;
+    color: white;
+  }
+  
+  /* Custom CSS */
+  .custom-modal {
+    max-width: 30%;
+    /* You can adjust the width as needed */
+  }
+  
+  /* Custom CSS */
+  /* .modal-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+  /* } */
+  
+  .modal-backdrop.show {
+    opacity: 0.009; /* Set the opacity to 0 to make the backdrop transparent */
+  }
+  

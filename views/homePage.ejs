@@ -1,0 +1,134 @@
+<%- include("./partials/header.ejs") %>
+<main>
+  <div class="containerList">
+    <div class="titleBlock">
+      <% if (typeof title !== 'undefined' && title) { %>
+      <h1><%=title%></h1>
+      <% } else { %>
+      <h1>TO DO LIST</h1>
+      <% } %>
+    </div>
+    <div class="titleListBlock">
+      <!-- //here is the input for the title of the List  -->
+      <form action="/submit" method="post" name="submitTitle">
+        <input
+          name="titleListT"
+          id="inputField"
+          type="text"
+          class="form-control"
+          placeholder="Title of List"
+        />
+      </form>
+    </div>
+    <div class="container">
+      <div class="listBlock scrollable-table">
+        <div class="table-full-width table-responsive">
+          <table class="table">
+            <tbody>
+              <!-- do not modify this -->
+              <% if (typeof arr !== 'undefined' && arr.length > 0) { %><!-- do not modify this -->
+              <% arr.forEach(function(task){ %>
+              <!-- do not modify this -->
+              <tr>
+                <td>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <p class="title"><%= task.taskTitle %></p>
+                  <p class="text-muted"><%= task.taskDescription %></p>
+                </td>
+                <td class="td-actions text-right">
+                  <form action="/deleteTask" method="post" name="taskDT">
+                    <button
+                      type="submit"
+                      rel="tooltip"
+                      name="deleteTask"
+                      class="btn btn-link"
+                      value="<%=task._id%>"
+                      data-original-title="Delete Task"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="15"
+                        height="15"
+                        fill="currentColor"
+                        class="bi bi-trash"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"
+                        />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"
+                        />
+                      </svg>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              <% } ); } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="addTaskBlock">
+      <form
+        action="/submit"
+        method="POST"
+        name="submitT"
+        id="saveTaskandListFormID"
+      >
+        <div class="input-group">
+          <input
+            name="titleI"
+            type="text"
+            class="form-control"
+            placeholder="Task title"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="submit"
+            name="action"
+            id="saveTaskButton"
+            value="addToList"
+          >
+            ADD TASK
+          </button>
+          <%- include("./partials/someJScode.ejs") %>
+        </div>
+        <div class="input-group">
+          <textarea
+            id="feedback"
+            name="iDescription"
+            rows="2"
+            cols="36"
+            class="form-control"
+            placeholder="Describe task"
+          ></textarea>
+          <button
+            class="btn btn-outline-primary"
+            type="submit"
+            name="action"
+            value="saveList"
+          >
+            SAVE LIST
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include("./partials/footer.ejs") %>

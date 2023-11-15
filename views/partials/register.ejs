@@ -1,0 +1,78 @@
+<div class="SignUpC">
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdropSignUp"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabelSignUp"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabelSignUp">
+              Modal title
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- her is the modal body -->
+            <div class="myform bg-dark">
+              <h1 class="text-center">Sign UP Form</h1>
+              <form action="/signUp" method="post">
+                <div class="mb-3 mt-4">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Username</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    name="username"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    name="password"
+                  />
+                </div>
+                <button type="submit" class="btn btn-light mt-3">Sign Up</button>
+                <!-- <p>Not a member? <a href="#">Signup now</a></p> -->
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a
+              class="btn btn-social btn-google"
+              href="/auth/google"
+              class="text-white me-4"
+            >
+              <i class="fab fa-google"></i>
+            </a>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
