@@ -11,6 +11,10 @@ import homePageRouter from './routes/homePageRouter.js';
 import logoutRouter from './routes/logoutRouter.js';
 import menuPageRouter from './routes/menuPageRouter.js';
 import addTaskSaveListRouter from './routes/addSaveTaskRouter.js';
+import deleteListRouter from './routes/deleteListRouter.js';
+import editTaskInSavedList from './routes/editTaskInSavedList.js';
+//this deletes a task when creating a list before it saved
+import deleteTaskRouter from './routes/deleteTaskRouter.js'
 
 // Importing models and database connection
 import db from './database/connection.js';
@@ -43,6 +47,9 @@ app.use(loginRouter);
 app.use(homePageRouter);
 app.use(addTaskSaveListRouter);
 app.use(menuPageRouter);
+app.use(deleteListRouter);
+app.use(editTaskInSavedList);
+app.use(deleteTaskRouter);
 
 app.use(logoutRouter);
 // Starting the server
