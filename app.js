@@ -1,17 +1,16 @@
 // Importing necessary modules from Node.js and npm
-// Importing the Express framework for building web applications
 import express from 'express';
 import 'dotenv/config';
 import passport from 'passport';
-// Importing express-session to handle sessions
 import session from 'express-session';
 
 // Importing routers from different files to handle specific routes
-// 
 import loginRouter from './routes/loginRouter.js';
 import registerRouter from './routes/registerRouter.js'; 
 import homePageRouter from './routes/homePageRouter.js';
-import logoutRouter from './routes/logoutRouter.js'
+import logoutRouter from './routes/logoutRouter.js';
+import menuPageRouter from './routes/menuPageRouter.js';
+import addTaskSaveListRouter from './routes/addSaveTaskRouter.js';
 
 // Importing models and database connection
 import db from './database/connection.js';
@@ -41,7 +40,9 @@ app.get('/', (req, res) => {
 // Using the imported routers for handling specific paths
 app.use(registerRouter); 
 app.use(loginRouter);
-app.use(homePageRouter); 
+app.use(homePageRouter);
+app.use(addTaskSaveListRouter);
+app.use(menuPageRouter);
 
 app.use(logoutRouter);
 // Starting the server
