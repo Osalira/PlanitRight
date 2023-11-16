@@ -4,24 +4,11 @@ import passport from 'passport';
 const router = express.Router();
 
 // Define a route
-router.post('/login', async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-  
-    const user = new userInfo({
-      username: username,
-      password: password,
-    });
-  
-    req.login(user, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        passport.authenticate('local')(req, res, function () {
-          res.redirect('/home');
-        });
-      }
-    });
-  });
+
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/home',
+  failureRedirect: '/',
+  failureFlash: 'Enter a correct password or username'  // Enable flash messages for failures
+}));
 
 export default router;

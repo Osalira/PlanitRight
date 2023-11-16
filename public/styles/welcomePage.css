@@ -30,6 +30,18 @@
     margin-bottom: 20px;
   }
   
+  .flash-message {
+    position: fixed; /* Fixed position */
+    top: 20%; /* Adjust this value as needed */
+    left: 50%; /* Centering the div */
+    transform: translate(-50%, -50%); /* Adjust position precisely */
+    width: 25%; /* Width set to 1/4th of the screen */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    padding: 10px; /* Some padding */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5); /* Optional: Adds a shadow for better visibility */
+    text-align: center; /* Center the text */
+  }
+  
   /* .logoI {
     position: absolute;
     top: 20%; 

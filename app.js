@@ -5,6 +5,7 @@ import passport from 'passport';
 import session from 'express-session';
 
 // Importing routers from different files to handle specific routes
+import welcomePageRouter from './routes/welcomePageRouter.js';
 import loginRouter from './routes/loginRouter.js';
 import registerRouter from './routes/registerRouter.js'; 
 import homePageRouter from './routes/homePageRouter.js';
@@ -35,13 +36,10 @@ app.set('view engine', 'ejs'); // Setting EJS as the template engine for renderi
 
 //callimng the function with the setup for passport and sessions
 configurePassport(app, userInfo);
-// Routing
-// Home route
-app.get('/', (req, res) => {
-  res.render('welcomePage'); // Rendering the welcome page for the root route
-});
 
+// Routing
 // Using the imported routers for handling specific paths
+app.use(welcomePageRouter);
 app.use(registerRouter); 
 app.use(loginRouter);
 app.use(homePageRouter);

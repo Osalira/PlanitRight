@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import flash from 'connect-flash';
 import passport from 'passport';
 
 const configurePassport = (app, userInfo) => {
@@ -10,10 +11,10 @@ const configurePassport = (app, userInfo) => {
             saveUninitialized: false,
         })
     );
-
+    app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
-
+    
     passport.use(userInfo.createStrategy());
 
     passport.serializeUser(function (user, done) {
