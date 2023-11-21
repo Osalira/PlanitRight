@@ -11,3 +11,5 @@ const dbUri = process.env.CONNECTION_STRING;
   
 export default db;
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/yourDatabase', { useNewUrlParser: true, useUnifiedTopology: true });
