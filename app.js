@@ -15,7 +15,8 @@ import addTaskSaveListRouter from './routes/addSaveTaskRouter.js';
 import deleteListRouter from './routes/deleteListRouter.js';
 import editTaskInSavedList from './routes/editTaskInSavedList.js';
 //this deletes a task when creating a list before it saved
-import deleteTaskRouter from './routes/deleteTaskRouter.js'
+import deleteTaskRouter from './routes/deleteTaskRouter.js';
+import editSavedTaskMenuList from './routes/editTaskModalRouter.js';
 
 // Importing models and database connection
 import db from './database/connection.js';
@@ -48,6 +49,7 @@ app.use(menuPageRouter);
 app.use(deleteListRouter);
 app.use(editTaskInSavedList);
 app.use(deleteTaskRouter);
+app.use(editSavedTaskMenuList);
 
 app.use(logoutRouter);
 // Starting the server
