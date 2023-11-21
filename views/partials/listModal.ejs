@@ -5,12 +5,19 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
+<form action="/saveEditedTasks" method="post">
   <div class="modal-dialog custom-modal">
-    <div class="modal-content ">
+    <div class="modal-content modalBodyC">
       <div class="modal-header headerC">
-        <h1 class="modal-title fs-5" id="exampleModal<%= uniID %>Label">
-          <%= fileD.listTitle %>
-        </h1>
+        <div id="listTitleDisplay-<%= uniID %>">
+          <h1 class="modal-title fs-5" id="exampleModal<%= uniID %>Label">
+              <%= fileD.listTitle %>
+          </h1>
+      </div>
+      <!-- Editable List Title (Initially Hidden) -->
+     <div id="listTitleEdit-<%= uniID %>" style="display: none;">
+        <input type="text" name="editedListTitle" value="<%= fileD.listTitle %>" />
+     </div>
         <button
           type="button"
           class="btn-close"
@@ -18,8 +25,8 @@
           aria-label="Close"
         ></button>
       </div>
-      <form action="/saveEditedTasks" method="post">
-      <div class="modal-body">
+      
+      <div class="modal-body modalBodyC">
         <input type="hidden" name="listId" value="<%=fileD._id%>">
         <% if (typeof fileD.listOfTasks !== 'undefined' &&
         fileD.listOfTasks.length > 0) { %>
@@ -121,6 +128,12 @@ function editTask(taskId) {
     titleEdit.style.display = titleEdit.style.display === 'none' ? '' : 'none';
     descDisplay.style.display = descDisplay.style.display === 'none' ? '' : 'none';
     descEdit.style.display = descEdit.style.display === 'none' ? '' : 'none';
+    //
+    const listTitleDisplay = document.getElementById(`listTitleDisplay-${taskId}`);
+    const listTitleEdit = document.getElementById(`listTitleEdit-${taskId}`);
+
+    listTitleDisplay.style.display = listTitleDisplay.style.display === 'none' ? '' : 'none';
+    listTitleEdit.style.display = listTitleEdit.style.display === 'none' ? '' : 'none';
 }
 
 

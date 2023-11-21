@@ -145,3 +145,10 @@ footer {
     opacity: 0.009; /* Set the opacity to 0 to make the backdrop transparent */
   }
   
+  .modalBodyC {
+    min-width: 340px;
+    display: flex;
+    /* text-align: center;
+    justify-content: center;
+    align-items: center;  */
+  }

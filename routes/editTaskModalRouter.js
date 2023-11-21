@@ -7,9 +7,7 @@ const router = express.Router();
 router.post('/saveEditedTasks', async (req, res) => {
     try {
         const listId = req.body.listId;
-
-        console.log("Used ID: ", listId);
-        console.log(req.body);
+        const editedListTitle = req.body.editedListTitle; // Retrieve the edited list title
 
         if (!mongoose.isValidObjectId(listId)) {
             return res.status(400).send('Invalid list ID');
@@ -20,11 +18,16 @@ router.post('/saveEditedTasks', async (req, res) => {
             return res.status(404).send('Task list not found');
         }
 
+        // Update the list title if it has been edited
+        if (editedListTitle !== undefined) {
+            taskList.listTitle = editedListTitle;
+        }
+
         // Update each task in the list
         taskList.listOfTasks.forEach(task => {
             const editedTitle = req.body[`editedTitle_${task._id}`];
             const editedDesc = req.body[`editedDesc_${task._id}`];
-            console.log(editedTitle);
+
             if (editedTitle !== undefined) {
                 task.taskTitle = editedTitle;
             }
@@ -40,5 +43,6 @@ router.post('/saveEditedTasks', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
 
 export default router;
