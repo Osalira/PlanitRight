@@ -32,21 +32,25 @@
                 name=""
                 value=""
               />
-              <label class="form-check-label"> <%= list.taskTitle %> </label>
+              <label class="form-check-label" id="title-<%= list._id %>"> <%= list.taskTitle %> </label>
             </div>
             <div class="d-flex justify-content-between align-items-center">
               <!-- Flex container -->
-              <p class="text-muted"><%= list.taskDescription %></p>
+              <p class="text-muted" id="task-<%= list._id %>"><%= list.taskDescription %></p>
+              <form action="/editTaskModal/<%= list._id %>" method="get">
               <button
-                class="btn btn-link"
+                class="btn btn-link editButton"
                 name="editListElement"
                 type="button"
                 id="dropdownMenuButton<%= list._id %>"
                 data-listid="<%= list._id %>"
                 data-taskid="<%= list.taskID %>"
+                value="<%= list.taskID %>"
                 data-original-title="Edit Task"
                 aria-haspopup="true"
                 aria-expanded="false"
+                onclick="editTask('<%= list._id %>', '<%= list.taskTitle %>', '<%= list.taskDescription %>')"
+
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,6 +66,7 @@
                   />
                 </svg>
               </button>
+            </form>
             </div>
           </li>
           <% }); %>
@@ -86,3 +91,20 @@
   integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
   crossorigin="anonymous"
 ></script>
+
+<script>
+
+//here is the java for editing the task and putting the cursur ready to edit
+function editTask(taskId, taskTitle, taskDescription) {
+    const titleElement = document.getElementById(`title-${taskId}`);
+    const descriptionElement = document.getElementById(`task-${taskId}`);
+
+    titleElement.innerHTML = `<input type="text" id="editTitle-${taskId}" value="${taskTitle.replace(/"/g, '&quot;')}">`;
+    descriptionElement.innerHTML = `<textarea id="editDesc-${taskId}">${taskDescription}</textarea>
+                                    <button onclick="saveTask('${taskId}')">Save</button>`;
+
+    document.getElementById(`editTitle-${taskId}`).focus();
+}
+
+</script>
+

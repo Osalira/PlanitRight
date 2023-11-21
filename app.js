@@ -34,7 +34,7 @@ app.use(express.static('public')); // Serving static files from the 'public' dir
 
 app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
 
-//callimng the function with the setup for passport and sessions
+//callimng the function with the setup for passport and sessions(user authentications and all that)
 configurePassport(app, userInfo);
 
 // Routing
