@@ -122,19 +122,30 @@ function editTask(taskId) {
     const titleEdit = document.getElementById(`titleEdit-${taskId}`);
     const descDisplay = document.getElementById(`descDisplay-${taskId}`);
     const descEdit = document.getElementById(`descEdit-${taskId}`);
-
-    // Toggle visibility
-    titleDisplay.style.display = titleDisplay.style.display === 'none' ? '' : 'none';
-    titleEdit.style.display = titleEdit.style.display === 'none' ? '' : 'none';
-    descDisplay.style.display = descDisplay.style.display === 'none' ? '' : 'none';
-    descEdit.style.display = descEdit.style.display === 'none' ? '' : 'none';
-    //
     const listTitleDisplay = document.getElementById(`listTitleDisplay-${taskId}`);
     const listTitleEdit = document.getElementById(`listTitleEdit-${taskId}`);
 
-    listTitleDisplay.style.display = listTitleDisplay.style.display === 'none' ? '' : 'none';
-    listTitleEdit.style.display = listTitleEdit.style.display === 'none' ? '' : 'none';
+    // Function to toggle visibility
+    function toggleVisibility(element) {
+        element.style.display = element.style.display === 'none' ? '' : 'none';
+    }
+
+    // Toggle visibility for each element
+    toggleVisibility(titleDisplay);
+    toggleVisibility(titleEdit);
+    toggleVisibility(descDisplay);
+    toggleVisibility(descEdit);
+    toggleVisibility(listTitleDisplay);
+    toggleVisibility(listTitleEdit);
+
+    // Set values from display to editable fields
+    if (titleEdit.style.display !== 'none') {
+        titleEdit.querySelector('input').value = titleDisplay.textContent;
+        descEdit.querySelector('textarea').value = descDisplay.textContent;
+        listTitleEdit.querySelector('input').value = listTitleDisplay.textContent;
+    }
 }
+
 
 
 </script>
