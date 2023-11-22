@@ -21,7 +21,7 @@
       </form>
     </div>
     <div class="container">
-      <div class="listBlock scrollable-table">
+      <div class="listBlock scrollable-table ">
         <div class="table-full-width table-responsive">
           <table class="table">
             <tbody>
@@ -45,7 +45,7 @@
                   </div>
                 </td>
                 <td>
-                  <p class="title"><%= task.taskTitle %></p>
+                  <p class="title taskTitleStyle"><%= task.taskTitle %></p>
                   <p class="text-muted"><%= task.taskDescription %></p>
                 </td>
                 <td class="td-actions text-right">
@@ -97,6 +97,7 @@
             class="form-control"
             placeholder="Task title"
           />
+         
           <button
             class="btn btn-outline-secondary"
             type="submit"

@@ -6,8 +6,8 @@
   aria-hidden="true"
 >
 <form action="/saveEditedTasks" method="post">
-  <div class="modal-dialog custom-modal">
-    <div class="modal-content modalBodyC">
+  <div class="modal-dialog ">
+    <div class="modal-content modalListMenu">
       <div class="modal-header headerC">
         <div id="listTitleDisplay-<%= uniID %>">
           <h1 class="modal-title fs-5" id="exampleModal<%= uniID %>Label">
@@ -97,7 +97,7 @@
         <% } %>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer cardFooter d-flex justify-content-end">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
