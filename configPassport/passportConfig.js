@@ -3,6 +3,7 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
 
+
 const configurePassport = (app, userInfo) => {
     app.use(
         session({
@@ -14,7 +15,10 @@ const configurePassport = (app, userInfo) => {
     app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
+    //
     
+
+    //
     passport.use(userInfo.createStrategy());
 
     passport.serializeUser(function (user, done) {

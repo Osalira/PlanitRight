@@ -3,7 +3,7 @@ import express from 'express';
 import 'dotenv/config';
 import passport from 'passport';
 import session from 'express-session';
-
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 // Importing routers from different files to handle specific routes
 import welcomePageRouter from './routes/welcomePageRouter.js';
 import loginRouter from './routes/loginRouter.js';
@@ -17,6 +17,7 @@ import editTaskInSavedList from './routes/editTaskInSavedList.js';
 //this deletes a task when creating a list before it saved
 import deleteTaskRouter from './routes/deleteTaskRouter.js';
 import editSavedTaskMenuList from './routes/editTaskModalRouter.js';
+import authGoogleRouter from './routes/authGoogleRouter.js';
 
 // Importing models and database connection
 import db from './database/connection.js';
@@ -50,9 +51,10 @@ app.use(deleteListRouter);
 app.use(editTaskInSavedList);
 app.use(deleteTaskRouter);
 app.use(editSavedTaskMenuList);
-
+app.use(authGoogleRouter);
 app.use(logoutRouter);
 // Starting the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+

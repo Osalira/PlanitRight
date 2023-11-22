@@ -9,11 +9,16 @@ const taskSchema = new Schema({
   taskDescription: String,
 })
 
-const TasklistSchema = new Schema({
+
+const TasklistSchema = new mongoose.Schema({
     listTitle: String,
     listOfTasks: [taskSchema],
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    }
   });
-
 const listTasks = model('listsOfTask', TasklistSchema);
 
 
