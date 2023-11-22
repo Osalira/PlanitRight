@@ -9,7 +9,7 @@ router.post('/submit', async (req, res) => {
   const curUserID = req.body.userId;
 
   if (!req.isAuthenticated()) {
-    return res.redirect('/login'); // Redirect to login if not authenticated
+    return res.redirect('/'); // Redirect to login if not authenticated
   }
 
   const userId = req.user._id; // Get the authenticated user's ID
