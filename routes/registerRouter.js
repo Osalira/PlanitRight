@@ -4,15 +4,12 @@ import userInfo from '../database/models/User.js';
 
 const router = express.Router();
 
-router.post('/signUp', (req, res) => {
+router.post('/signUp', async (req, res) => {
   const { username, password } = req.body;
 
-  // Check if the user already exists
-  userInfo.findOne({ username: username }, (err, existingUser) => {
-    if (err) {
-      console.error(err);
-      return res.redirect('/'); // Replace '/signup' with your signup page
-    }
+  try {
+    // Check if the user already exists
+    const existingUser = await userInfo.findOne({ username: username });
 
     if (existingUser) {
       // User already exists
@@ -21,7 +18,7 @@ router.post('/signUp', (req, res) => {
     }
 
     // If user does not exist, register a new one
-    userInfo.register({ username: username }, password, (err, user) => {
+    userInfo.register(new userInfo({ username: username }), password, (err, user) => {
       if (err) {
         console.error(err);
         return res.redirect('/');
@@ -32,7 +29,10 @@ router.post('/signUp', (req, res) => {
         res.redirect('/home'); // Redirect to home after signup
       });
     });
-  });
+  } catch (err) {
+    console.error(err);
+    return res.redirect('/'); // Replace with your error page or signup page
+  }
 });  
 
 export default router;
