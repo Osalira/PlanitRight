@@ -42,6 +42,11 @@ footer {
 
   .form-control {
     border: 1px solid #ced4da; /* Example border */
+   
+}
+
+.textAreaC {
+  color: #333;
 }
 
   /* 

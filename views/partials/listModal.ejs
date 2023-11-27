@@ -26,53 +26,59 @@
         ></button>
       </div>
       
-      <div class="modal-body modalBodyC">
+      <div class="modal-body modalBodyC container">
         <input type="hidden" name="listId" value="<%=fileD._id%>">
         <% if (typeof fileD.listOfTasks !== 'undefined' &&
         fileD.listOfTasks.length > 0) { %>
         <ul class="list-group">
           <% fileD.listOfTasks.forEach(function(list) { %>
-          <li class="list-group-item">
-            
-    
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                name=""
-                value=""
-              />
-              <div id="titleDisplay-<%= list._id %>">
-                <label class="form-check-label"><%= list.taskTitle %></label>
-            </div>
-            <!-- Title Editable (Initially Hidden) -->
-            <div id="titleEdit-<%= list._id %>" style="display: none;">
-                <input type="text" name="editedTitle_<%= list._id %>" value="<%= list.taskTitle %>" />
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <!-- Flex container -->
-              <div id="descDisplay-<%= list._id %>">
-                <p class="text-muted"><%= list.taskDescription %></p>
-            </div>
-            <!-- Description Editable (Initially Hidden) -->
-            <div id="descEdit-<%= list._id %>" style="display: none;">
-                <textarea name="editedDesc_<%= list._id %>"><%= list.taskDescription %></textarea>
-            </div>
-              <!-- delimitation -->
-              <button
-                class="btn btn-link editButton"
-                name="editListElement"
-                type="button"
-                id="dropdownMenuButton<%= list._id %>"
-                data-listid="<%= list._id %>"
-                data-taskid="<%= list.taskID %>"
-                value="<%= list.taskID %>"
-                data-original-title="Edit Task"
-                aria-haspopup="true"
-                aria-expanded="false"
-                onclick="editTask('<%= list._id %>', '<%= list.taskTitle %>', '<%= list.taskDescription %>')"
-
-              >
+            <li class="list-group-item">
+              <div class="row">
+                <!-- Checkbox on the left -->
+                <div class="col-auto">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name=""
+                      value=""
+                    />
+                  </div>
+                </div>
+          
+                <!-- Task title and description in the middle -->
+                <div class="col">
+                  <div id="titleDisplay-<%= list._id %>">
+                    <label class="form-check-label"><%= list.taskTitle %></label>
+                  </div>
+                  <!-- Title Editable (Initially Hidden) -->
+                  <div id="titleEdit-<%= list._id %>" style="display: none;">
+                    <input type="text" name="editedTitle_<%= list._id %>" value="<%= list.taskTitle %>" />
+                  </div>
+                  <div id="descDisplay-<%= list._id %>">
+                    <p class="text-muted"><%= list.taskDescription %></p>
+                  </div>
+                  <!-- Description Editable (Initially Hidden) -->
+                  <div id="descEdit-<%= list._id %>" style="display: none;">
+                    <textarea name="editedDesc_<%= list._id %>"><%= list.taskDescription %></textarea>
+                  </div>
+                </div>
+          
+                <!-- Edit button on the right -->
+                <div class="col-auto">
+                  <button
+                    class="btn btn-link editButton"
+                    name="editListElement"
+                    type="button"
+                    id="dropdownMenuButton<%= list._id %>"
+                    data-listid="<%= list._id %>"
+                    data-taskid="<%= list.taskID %>"
+                    value="<%= list.taskID %>"
+                    data-original-title="Edit Task"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    onclick="editTask('<%= list._id %>', '<%= list.taskTitle %>', '<%= list.taskDescription %>')"
+                  >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
