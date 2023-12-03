@@ -5,7 +5,8 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-<form action="/saveEditedTasks" method="post">
+<form action="/addTaskToSavedList" method="post">
+  <input type="hidden" name="listId" value="<%= listIDT %>">
   <div class="modal-dialog ">
     <div class="modal-content modalListMenu">
       <div class="modal-header headerC">
@@ -27,87 +28,35 @@
       </div>
       
       <div class="modal-body modalBodyC container">
-        <input type="hidden" name="listId" value="<%=fileD._id%>">
-        <% if (typeof fileD.listOfTasks !== 'undefined' &&
-        fileD.listOfTasks.length > 0) { %>
+        
         <ul class="list-group">
-          <% fileD.listOfTasks.forEach(function(list) { %>
-            <li class="list-group-item">
-              <div class="row">
-                <!-- Checkbox on the left -->
-                <div class="col-auto">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name=""
-                      value=""
-                    />
-                  </div>
-                </div>
-          
-                <!-- Task title and description in the middle -->
-                <div class="col">
-                  <div id="titleDisplay-<%= list._id %>">
-                    <label class="form-check-label"><%= list.taskTitle %></label>
-                  </div>
-                  <!-- Title Editable (Initially Hidden) -->
-                  <div id="titleEdit-<%= list._id %>" style="display: none;">
-                    <input type="text" name="editedTitle_<%= list._id %>" value="<%= list.taskTitle %>" />
-                  </div>
-                  <div id="descDisplay-<%= list._id %>">
-                    <p class="text-muted"><%= list.taskDescription %></p>
-                  </div>
-                  <!-- Description Editable (Initially Hidden) -->
-                  <div id="descEdit-<%= list._id %>" style="display: none;">
-                    <textarea name="editedDesc_<%= list._id %>"><%= list.taskDescription %></textarea>
-                  </div>
-                </div>
-          
-                <!-- Edit button on the right -->
-                <div class="col-auto">
-                  <button
-                    class="btn btn-link editButton"
-                    name="editListElement"
-                    type="button"
-                    id="dropdownMenuButton<%= list._id %>"
-                    data-listid="<%= list._id %>"
-                    data-taskid="<%= list.taskID %>"
-                    value="<%= list.taskID %>"
-                    data-original-title="Edit Task"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    onclick="editTask('<%= list._id %>', '<%= list.taskTitle %>', '<%= list.taskDescription %>')"
-                  >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-pencil"
-                  viewBox="0 0 16 16"
-                >
-                  <!-- Path for the pencil icon -->
-                  <path
-                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
-                  />
-                </svg>
-              </button>
-            
+                 
+            <div class="modal-body modalBodyC container">
+              <div class="input-group">
+                <input
+                  name="newTaskTitle"
+                  type="text"
+                  class="form-control textAreaC"
+                  placeholder="Task title"
+                />
+              </div>
+              <div class="input-group">
+                <textarea
+                  name="newTaskDescription"
+                  rows="2"
+                  class="form-control textAreaC"
+                  placeholder="Describe task"
+                ></textarea>
+              </div>
             </div>
-          </li>
-          <% }); %>
+         
         </ul>
-        <% } else { %>
-        <p>No tasks available.</p>
-        <% } %>
+     
       </div>
 
       <div class="modal-footer cardFooter d-flex justify-content-end">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="submit" id="list_savesChanges" class="btn btn-primary">Save changes</button>
+        
+        <button type="submit" id="list_savesChanges" class="btn btn-primary">ADD TASK</button>
       </div>
     </form>
     </div>
@@ -119,40 +68,4 @@
   integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
   crossorigin="anonymous"
 ></script>
-
-<script>
-
-//here is the java for editing the task and putting the cursur ready to edit
-function editTask(taskId) {
-    const titleDisplay = document.getElementById(`titleDisplay-${taskId}`);
-    const titleEdit = document.getElementById(`titleEdit-${taskId}`);
-    const descDisplay = document.getElementById(`descDisplay-${taskId}`);
-    const descEdit = document.getElementById(`descEdit-${taskId}`);
-    const listTitleDisplay = document.getElementById(`listTitleDisplay-${taskId}`);
-    const listTitleEdit = document.getElementById(`listTitleEdit-${taskId}`);
-
-    // Function to toggle visibility
-    function toggleVisibility(element) {
-        element.style.display = element.style.display === 'none' ? '' : 'none';
-    }
-
-    // Toggle visibility for each element
-    toggleVisibility(titleDisplay);
-    toggleVisibility(titleEdit);
-    toggleVisibility(descDisplay);
-    toggleVisibility(descEdit);
-    toggleVisibility(listTitleDisplay);
-    toggleVisibility(listTitleEdit);
-
-    // Set values from display to editable fields
-    if (titleEdit.style.display !== 'none') {
-        titleEdit.querySelector('input').value = titleDisplay.textContent;
-        descEdit.querySelector('textarea').value = descDisplay.textContent;
-        listTitleEdit.querySelector('input').value = listTitleDisplay.textContent;
-    }
-}
-
-
-
-</script>
 

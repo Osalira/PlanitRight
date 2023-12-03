@@ -6,30 +6,20 @@ const currentYear = new Date().getFullYear();
 
 router.get('/home', async (req, res) => {
   if (req.isAuthenticated()) {
-    try {
-      // Fetch the last document for the current user
-      const userId = req.user._id; // Get the logged-in user's ID
-      //console.log(userId);
-      const lastSavedDoc = await listTasks.findOne({ user: userId }).sort({ _id: -1 }).exec();
+    // Create a new list instance for the current user
+    const userId = req.user._id;
+    const newList = new listTasks({
+      listTitle: "", // Initially empty title
+      listOfTasks: [], // Initially empty task list
+      user: userId,
+    });
 
-      // Check if lastSavedDoc is not null
-      if (lastSavedDoc && lastSavedDoc.listOfTasks) {
-        res.render('homePage', {
-          title: lastSavedDoc.listTitle,
-          arr: lastSavedDoc.listOfTasks,
-          curUserId: lastSavedDoc.user,
-          curYear: currentYear,
-        });
-      } else {
-        // Render homePage without tasks if no document is found
-        res.render('homePage', {
-          curYear: currentYear,
-        });
-      }
-    } catch (error) {
-      res.status(500).send({ message: 'Error retrieving data' });
-      console.log(error);
-    }
+    res.render('homePage', {
+      title: newList.listTitle,
+      arr: newList.listOfTasks,
+      curUserId: userId,
+      curYear: currentYear,
+    });
   } else {
     res.redirect('/');
   }

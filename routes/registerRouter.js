@@ -14,6 +14,7 @@ router.post('/signUp', async (req, res) => {
     if (existingUser) {
       // User already exists
       console.log('User already exists with this username.');
+      req.flash('error', 'USERNAME ALREADY TAKEN');
       return res.redirect('/'); // User exists, redirect back to signup
     }
 
@@ -21,11 +22,13 @@ router.post('/signUp', async (req, res) => {
     userInfo.register(new userInfo({ username: username }), password, (err, user) => {
       if (err) {
         console.error(err);
+        
         return res.redirect('/');
       }
 
       // Authenticate the user after successful registration
       passport.authenticate('local')(req, res, () => {
+        
         res.redirect('/home'); // Redirect to home after signup
       });
     });

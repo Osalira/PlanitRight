@@ -28,7 +28,7 @@
   </head>
   <body>
    
-    <!-- from the welcome page, if the user enters wrong password of username-->
+    <!-- from the welcome page, if the user enters wrong password or username-->
     <% if (messages.error && messages.error.length > 0) { %>
       <div class="alert alert-danger flash-message" id="flashMessage">
         <% messages.error.forEach(function(message) { %>

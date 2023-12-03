@@ -18,11 +18,12 @@ import editTaskInSavedList from './routes/editTaskInSavedList.js';
 import deleteTaskRouter from './routes/deleteTaskRouter.js';
 import editSavedTaskMenuList from './routes/editTaskModalRouter.js';
 import authGoogleRouter from './routes/authGoogleRouter.js';
+import addTaskToSavedListRouter from './routes/addTaskToListRouter.js';
 
 // Importing models and database connection
 import db from './database/connection.js';
 import userInfo from './database/models/User.js';
-
+import flash from 'express-flash';
 //importing configuration passport function
 import configurePassport from './configPassport/passportConfig.js';
 // Creating an instance of Express to set up the server
@@ -41,6 +42,7 @@ configurePassport(app, userInfo);
 
 // Routing
 // Using the imported routers for handling specific paths
+app.use(flash());
 app.use(welcomePageRouter);
 app.use(registerRouter); 
 app.use(loginRouter);
@@ -49,6 +51,7 @@ app.use(addTaskSaveListRouter);
 app.use(menuPageRouter);
 app.use(deleteListRouter);
 app.use(editTaskInSavedList);
+app.use(addTaskToSavedListRouter);
 app.use(deleteTaskRouter);
 app.use(editSavedTaskMenuList);
 app.use(authGoogleRouter);

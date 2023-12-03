@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post('/submit', async (req, res) => {
   const actionH = req.body.action;
-  const curUserID = req.body.userId;
 
   if (!req.isAuthenticated()) {
     return res.redirect('/'); // Redirect to login if not authenticated
@@ -21,36 +20,45 @@ router.post('/submit', async (req, res) => {
         taskDescription: req.body.iDescription,
       });
 
-      // Find the current list that the user is interacting with
-      const lastList = await listTasks.findOne({ user: userId }).sort({ _id: -1 }).exec();
+      // Find the last list of the authenticated user or create a new one
+      let lastList = await listTasks.findOne({ user: userId }).sort({ _id: -1 }).exec();
 
-      if (lastList) {
-        lastList.listOfTasks.push(mytask);
-
-        const titleOfList = req.body.titleListT;
-        if (typeof titleOfList !== 'undefined' && titleOfList) {
-          lastList.listTitle = titleOfList;
-        }
-
-        await lastList.save();
+      if (!lastList) {
+        // Create a new list if none exists
+        lastList = new listTasks({
+          listTitle: req.body.titleListT || "New List",
+          listOfTasks: [],
+          user: userId,
+        });
       }
 
-      res.redirect('/home');
+      // Add the new task to the list
+      lastList.listOfTasks.push(mytask);
+      await lastList.save();
+
+      //present the home page saved with list of tasks
+        res.render('homePage', {
+      title: lastList.listTitle,
+      arr: lastList.listOfTasks,
+      curUserId: userId,
+      // curYear: currentYear,
+    });
     } catch (error) {
+      console.error('Error saving task:', error);
       res.status(500).send('Error saving task.');
-      console.error(error);
     }
   } else if (actionH === 'saveList') {
     try {
       const newList = new listTasks({
         listTitle: req.body.titleListT,
         listOfTasks: [],
-        user: userId, // Link this list to the current user
+        user: userId,
       });
       await newList.save();
 
       res.redirect('/menu');
     } catch (error) {
+      console.error('Error saving list:', error);
       res.status(500).send('Error saving list.');
     }
   } else {

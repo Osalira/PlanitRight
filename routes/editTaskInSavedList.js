@@ -2,7 +2,7 @@ import express from "express";
 import listTasks from "../database/models/ListTasks.js";
 const router = express.Router();
 
-router.post('/editTaskOfSavedList/:id', async (req, res) => {
+router.post('/editTaskOfSavedList', async (req, res) => {
     const actionE = req.body.editAction;
     if (actionE === 'editButton') {
       // res.redirect('/listModal.ejs');
