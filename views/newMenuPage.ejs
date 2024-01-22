@@ -4,7 +4,7 @@
   <% if (typeof listOfLists !== 'undefined' && listOfLists.length > 0) { %><!-- do not modify this -->
   <% listOfLists.forEach(function(doc){ %>
   <div class="cards_wrap">
-    <div class="headerC"><%=doc.listTitle %></div>
+    <div class="headerC"><%=doc.listTitle%></div>
     <div class="Card_Item">
       <div class="innerCard">
         <div class="container">
@@ -127,12 +127,7 @@
     </div>
    
     <div class="cardFooter d-flex cardFooterMenuC">
-        <!-- <form
-            class="d-flex ms-auto"
-            action="/addTaskToSavedList"
-            method="post"
-            name="SendIDList"
-        > -->
+       
         <button
             type="button"
             class="btn d-flex btn-outline-primary"
@@ -142,8 +137,7 @@
         >
         ADD TASK
         </button>
-        <!-- </form> -->
-        
+         
       <form
         class="d-flex ms-auto"
         action="/deleteList"

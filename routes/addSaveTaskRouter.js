@@ -12,7 +12,7 @@ router.post('/submit', async (req, res) => {
   }
 
   const userId = req.user._id; // Get the authenticated user's ID
-  
+
   if (actionH === 'addToList') {
     try {
       const mytask = new Task({
@@ -20,13 +20,11 @@ router.post('/submit', async (req, res) => {
         taskDescription: req.body.iDescription,
       });
 
-      // Find the last list of the authenticated user or create a new one
+      // Find the last list or create a new one
       let lastList = await listTasks.findOne({ user: userId }).sort({ _id: -1 }).exec();
-
-      if (!lastList) {
-        // Create a new list if none exists
+      if (!lastList || req.body.titleListT) {
         lastList = new listTasks({
-          listTitle: req.body.titleListT || "New List",
+          listTitle: req.body.titleListT || 'New List',
           listOfTasks: [],
           user: userId,
         });
@@ -36,21 +34,28 @@ router.post('/submit', async (req, res) => {
       lastList.listOfTasks.push(mytask);
       await lastList.save();
 
-      //present the home page saved with list of tasks
-        res.render('homePage', {
-      title: lastList.listTitle,
-      arr: lastList.listOfTasks,
-      curUserId: userId,
-      // curYear: currentYear,
-    });
+      // Render the homePage with the updated list and title
+      res.render('homePage', {
+        title: lastList.listTitle,
+        arr: lastList.listOfTasks,
+        curUserId: userId,
+      });
+
     } catch (error) {
-      console.error('Error saving task:', error);
-      res.status(500).send('Error saving task.');
+      console.error('Error adding task:', error);
+      res.status(500).send('Error adding task.');
     }
   } else if (actionH === 'saveList') {
     try {
+      // Save the current list
+      let lastList = await listTasks.findOne({ user: userId }).sort({ _id: -1 }).exec();
+      if (lastList) {
+        await lastList.save();
+      }
+
+      // Create a new list for future additions
       const newList = new listTasks({
-        listTitle: req.body.titleListT,
+        listTitle: 'New List',
         listOfTasks: [],
         user: userId,
       });

@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/deleteTask', async (req, res) => {
     try {
       const taskId = req.body.deleteTask;
+       // Get the authenticated user's ID
       const curList = await listTasks.findOne().sort({ _id: -1 }).exec();
   
       listTasks
@@ -15,8 +16,11 @@ router.post('/deleteTask', async (req, res) => {
           { $pull: { listOfTasks: { _id: taskId } } }
         )
         .exec();
-  
-      res.redirect('/home');
+          
+        res.render('homePage', {
+          title: curList.listTitle,
+          arr: curList.listOfTasks,
+        });
     } catch (error) {
       res.status(500).send(`Error deleting task. ${req.body.deleteTask}`);
       console.log(error);
