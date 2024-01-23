@@ -28,7 +28,7 @@ import flash from 'express-flash';
 import configurePassport from './configPassport/passportConfig.js';
 // Creating an instance of Express to set up the server
 const app = express();
-const PORT = process.env.LISTENING_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware setup
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data (from forms, etc.)
