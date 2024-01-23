@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-enco
 app.use(express.static('public')); // Serving static files from the 'public' directory
 
 app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
+app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
 
 //callimng the function with the setup for passport and sessions(user authentications and all that)
 configurePassport(app, userInfo);
