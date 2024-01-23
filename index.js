@@ -41,10 +41,11 @@ const __dirname = path.dirname(__filename);
 // Middleware setup
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data (from forms, etc.)
 
-app.use(express.static('public')); // Serving static files from the 'public' directory
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
+
+app.use(express.static('public')); // Serving static files from the 'public' directory
 
 //callimng the function with the setup for passport and sessions(user authentications and all that)
 configurePassport(app, userInfo);
