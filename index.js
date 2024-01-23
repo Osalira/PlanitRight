@@ -40,6 +40,13 @@ app.set('view engine', 'ejs'); // Setting EJS as the template engine for renderi
 //callimng the function with the setup for passport and sessions(user authentications and all that)
 configurePassport(app, userInfo);
 
+//
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
+
+
 // Routing
 // Using the imported routers for handling specific paths
 app.use(flash());
