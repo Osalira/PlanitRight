@@ -1,5 +1,9 @@
 // Importing necessary modules from Node.js and npm
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
 import 'dotenv/config';
 import passport from 'passport';
 import session from 'express-session';
@@ -29,13 +33,18 @@ import configurePassport from './configPassport/passportConfig.js';
 // Creating an instance of Express to set up the server
 const app = express();
 const PORT = process.env.PORT || 5000;
+//
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 // Middleware setup
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data (from forms, etc.)
 
 app.use(express.static('public')); // Serving static files from the 'public' directory
 
-app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
+app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
 
 //callimng the function with the setup for passport and sessions(user authentications and all that)
 configurePassport(app, userInfo);
