@@ -2,7 +2,12 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import "../styles/dummy.css";
+import "/styles/dummy.css";
+import "/styles/styles.css";
+import "./public/styles/bootstrap-social.css";
+import "./public/stylesstyles.css";
+import "./public/styles/welcomePage.css";
 
 import 'dotenv/config';
 import passport from 'passport';
