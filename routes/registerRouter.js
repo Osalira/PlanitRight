@@ -29,7 +29,7 @@ router.post('/signUp', async (req, res) => {
       // Authenticate the user after successful registration
       passport.authenticate('local')(req, res, () => {
         
-        res.redirect('/home'); // Redirect to home after signup
+        return res.redirect('/home'); // Redirect to home after signup
       });
     });
   } catch (err) {

@@ -30,10 +30,10 @@ router.post('/addTaskToSavedList', async (req, res) => {
         });
 
         await taskList.save();
-        res.redirect('/menu'); // Adjust the redirect as needed
+        return res.redirect('/menu'); // Adjust the redirect as needed
     } catch (error) {
         console.error(error);
-        res.status(500).send('Server error');
+        return res.status(500).send('Server error');
     }
 });
 

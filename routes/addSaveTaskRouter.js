@@ -35,7 +35,7 @@ router.post('/submit', async (req, res) => {
       await lastList.save();
 
       // Render the homePage with the updated list and title
-      res.render('homePage', {
+      return res.render('homePage', {
         title: lastList.listTitle,
         arr: lastList.listOfTasks,
         curUserId: userId,
@@ -43,7 +43,7 @@ router.post('/submit', async (req, res) => {
 
     } catch (error) {
       console.error('Error adding task:', error);
-      res.status(500).send('Error adding task.');
+      return res.status(500).send('Error adding task.');
     }
   } else if (actionH === 'saveList') {
     try {
@@ -61,13 +61,13 @@ router.post('/submit', async (req, res) => {
       });
       await newList.save();
 
-      res.redirect('/menu');
+      return res.redirect('/menu');
     } catch (error) {
       console.error('Error saving list:', error);
-      res.status(500).send('Error saving list.');
+      return res.status(500).send('Error saving list.');
     }
   } else {
-    res.status(400).send('Invalid action.');
+    return res.status(400).send('Invalid action.');
   }
 });
 

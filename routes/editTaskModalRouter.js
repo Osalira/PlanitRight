@@ -37,10 +37,10 @@ router.post('/saveEditedTasks', async (req, res) => {
         });
 
         await taskList.save();
-        res.redirect('/menu'); // Redirect to a success page or back to the list
+        return res.redirect('/menu'); // Redirect to a success page or back to the list
     } catch (error) {
         console.error(error);
-        res.status(500).send('Server error');
+        return res.status(500).send('Server error');
     }
 });
 

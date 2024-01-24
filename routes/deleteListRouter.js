@@ -11,10 +11,10 @@ router.post('/deleteList', async (req, res) => {
   
       listTasks.deleteOne({ _id: listId }).exec();
   
-      res.redirect('/menu');
+      return res.redirect('/menu');
     } catch (error) {
-      res.status(500).send(`Error deleting task. ${req.body.ListItemId}`);
-      console.log(error);
+      return res.status(500).send(`Error deleting task. ${req.body.ListItemId}`);
+      
     }
   });
 

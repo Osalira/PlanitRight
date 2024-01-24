@@ -17,13 +17,13 @@ router.post('/deleteTask', async (req, res) => {
         )
         .exec();
           
-        res.render('homePage', {
+        return res.render('homePage', {
           title: curList.listTitle,
           arr: curList.listOfTasks,
         });
     } catch (error) {
-      res.status(500).send(`Error deleting task. ${req.body.deleteTask}`);
-      console.log(error);
+      return res.status(500).send(`Error deleting task. ${req.body.deleteTask}`);
+  
     }
   });
 

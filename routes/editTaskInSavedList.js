@@ -16,14 +16,14 @@ router.post('/editTaskOfSavedList', async (req, res) => {
         listTasks
           .updateOne({ _id: listID }, { $pull: { listOfTasks: { _id: taskID } } })
           .exec();
-        res.redirect('/menu');
+        return res.redirect('/menu');
       } catch (error) {
         console.error('Error:', error);
         // Send an error JSON response
-        res.status(500).json({ message: 'An error occurred.' });
+        return res.status(500).json({ message: 'An error occurred.' });
       }
     } else {
-      res.status(400).send('Invalid action.');
+      return res.status(400).send('Invalid action.');
     }
   });
 

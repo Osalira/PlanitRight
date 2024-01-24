@@ -14,14 +14,14 @@ router.get('/home', async (req, res) => {
       user: userId,
     });
 
-    res.render('homePage', {
+    return res.render('homePage', {
       title: newList.listTitle,
       arr: newList.listOfTasks,
       curUserId: userId,
       curYear: currentYear,
     });
   } else {
-    res.redirect('/');
+    return res.redirect('/');
   }
 });
 
