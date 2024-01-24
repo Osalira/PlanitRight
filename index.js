@@ -2,12 +2,6 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import "../styles/dummy.css";
-import "/styles/dummy.css";
-import "/styles/styles.css";
-import "./public/styles/bootstrap-social.css";
-import "./public/stylesstyles.css";
-import "./public/styles/welcomePage.css";
 
 import 'dotenv/config';
 import passport from 'passport';
@@ -49,6 +43,8 @@ app.use(express.static('public')); // Serving static files from the 'public' dir
 app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data (from forms, etc.)
 
 app.set('views', path.join(__dirname, 'views'));
+app.set('public', path.join(__dirname, 'public'));
+
 app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
 
 
