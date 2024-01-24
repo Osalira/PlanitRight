@@ -50,7 +50,7 @@ app.set('configPassport', path.join(__dirname, 'configPassport'));
 app.set('/', path.join(__dirname, '/'));
 
 app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
-
+//
 
 //callimng the function with the setup for passport and sessions(user authentications and all that)
 configurePassport(app, userInfo);
@@ -79,7 +79,7 @@ app.use(editSavedTaskMenuList);
 app.use(authGoogleRouter);
 app.use(logoutRouter);
 // Starting the server
-app.set('port', (5000));
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

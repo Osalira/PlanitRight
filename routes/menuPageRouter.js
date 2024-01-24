@@ -9,7 +9,7 @@ router.get('/menu', async (req, res) => {
       // Ensure you have user authentication in place
       // req.user should contain the currently authenticated user's information
       if (!req.user) {
-        res.redirect('/');
+        return res.redirect('/');
         // return res.status(401).send('User not authenticated');
       }
 
@@ -17,16 +17,16 @@ router.get('/menu', async (req, res) => {
       const myLists = await listTasks.find({ user: userId }); // Retrieves only the documents belonging to the logged-in user
 
       if (myLists) {
-        res.render('newMenuPage', {
+        return res.render('newMenuPage', {
           listOfLists: myLists,
           curYear: currentYear,
         });
       } else {
-        res.status(404).send('No task lists found for the user');
+        return res.status(404).send('No task lists found for the user');
       }
     } catch (error) {
-      res.status(500).send('Error retrieving task lists');
       console.error(error);
+      return res.status(500).send('Error retrieving task lists');
     }
 });
 
