@@ -47,6 +47,7 @@ app.set('public', path.join(__dirname, 'public'));
 app.set('routes', path.join(__dirname, 'routes'));
 app.set('database', path.join(__dirname, 'database'));
 app.set('configPassport', path.join(__dirname, 'configPassport'));
+app.set('/', path.join(__dirname, '/'));
 
 app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
 
@@ -78,6 +79,8 @@ app.use(editSavedTaskMenuList);
 app.use(authGoogleRouter);
 app.use(logoutRouter);
 // Starting the server
+app.set('port', (5000));
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
