@@ -44,6 +44,9 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-enco
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('public', path.join(__dirname, 'public'));
+app.set('routes', path.join(__dirname, 'routes'));
+app.set('database', path.join(__dirname, 'database'));
+app.set('configPassport', path.join(__dirname, 'configPassport'));
 
 app.set('view engine', 'ejs'); // Setting EJS as the template engine for rendering views
 
