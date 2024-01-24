@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import passport from 'passport';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 // Importing routers from different files to handle specific routes
 import welcomePageRouter from './routes/welcomePageRouter.js';
@@ -61,6 +62,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error to check');
 });
 
+//here the config to save sessions whiles browsings
+
 
 // Routing
 // Using the imported routers for handling specific paths
@@ -79,7 +82,6 @@ app.use(editSavedTaskMenuList);
 app.use(authGoogleRouter);
 app.use(logoutRouter);
 // Starting the server
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

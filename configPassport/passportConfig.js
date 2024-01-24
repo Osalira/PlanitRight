@@ -1,15 +1,17 @@
 import express from 'express';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import flash from 'connect-flash';
 import passport from 'passport';
 
-
+const dbUril = process.env.CONNECTION_STRING;
 const configurePassport = (app, userInfo) => {
     app.use(
         session({
             secret: 'Our little secret.',
             resave: false,
-            saveUninitialized: false,
+            saveUninitialized: true,
+            store: MongoStore.create({ mongoUrl: dbUril })
         })
     );
     app.use(flash());
@@ -17,8 +19,6 @@ const configurePassport = (app, userInfo) => {
     app.use(passport.session());
     //
     
-
-    //
     passport.use(userInfo.createStrategy());
 
     passport.serializeUser(function (user, done) {
